@@ -27,10 +27,16 @@ font pango:DejaVu Sans Mono 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec urxvt
 
 # start nm-applet
 bindsym $mod+N exec nm-applet
+
+# start mutt
+bindsym $mod+M exec urxvt -e mutt
+
+# start i3lock
+bindsym $mod+P exec i3lock
 
 # stop nm-applet
 bindsym $mod+Shift+N exec pkill nm-applet
@@ -168,8 +174,8 @@ bar {
         font pango:DejaVu Sans Mono 10
 }
 
-exec --no-startup-id feh --bg-scale /home/robert/bg_image2.jpg
-exec --no-startup-id /home/robert/handy-scripts/bat_alert.sh /home/robert/handy-scripts/bat.mp3
+exec --no-startup-id feh --bg-scale /usr/share/backgrounds/gnome/Godafoss_Iceland.jpg
+exec_always --no-startup-id xrandr --dpi 220
 
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%- unmute

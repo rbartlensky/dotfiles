@@ -1,6 +1,6 @@
 URxvt.termName:         rxvt-256color
-URxvt.font:             xft:terminus-13
-URxvt.italicFont:       xft:terminus-13
+URxvt.font:             xft:terminus-16
+URxvt.italicFont:       xft:terminus-16
 URxvt.letterSpace:      -1
 URxvt.loginShell:       true
 URxvt.geometry:         80x50
@@ -8,8 +8,8 @@ URxvt.cutchars:         "`\"'&()*,:;<=>?[\\]^{|}$"
 URxvt.saveLines:        10000
 
 !light theme
-URxvt.background:       #000000
-URxvt.foreground:       #ffffff
+URxvt.background:       #ffffff
+URxvt.foreground:       #000000
 !light colors
 URxvt.color0:           #000000
 URxvt.color1:           #CD0000
@@ -29,16 +29,6 @@ URxvt.color13:          #ec93d3
 URxvt.color14:          #93e0e3
 URxvt.color15:          #000000
 
-!! Keycode fixes for Ctrl+direction in Vim
-!URxvt.keysym.C-Up:     \033[1;5A
-!URxvt.keysym.C-Down:   \033[1;5B
-!URxvt.keysym.C-Right:  \033[1;5C
-!URxvt.keysym.C-Left:   \033[1;5D
-!URxvt.keysym.C-Prior:  \033[5;5~
-!URxvt.keysym.C-Next:   \033[6;5~
-!URxvt.keysym.C-Home:   \033[7;5~
-!URxvt.keysym.C-End:    \033[8;5~
-
 ! Disable ISO 14755 unicode input so we can use Ctrl-Shift bindings
 URxvt.iso14755:        false
 URxvt.iso14755_52:     false
@@ -56,6 +46,9 @@ URxvt.scrollBar: false
 URxvt.visualBell: true
 
 ! Perl extensions
-URxvt.perl-ext-common:      default,matcher
-URxvt.matcher.button:       1
-URxvt.urlLauncher: firefox
+URxvt.perl-ext-common: default,matcher
+URxvt.url-launcher: /home/robert/firefox/firefox
+URxvt.url-select.underline: true
+URxvt.matcher.button:      1
+
+Xft.dpi: 220
