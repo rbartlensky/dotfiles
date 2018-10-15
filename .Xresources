@@ -1,33 +1,53 @@
+! Generated with :
+! XRDB2Xreources.py
+!
+*.foreground:  #4d4d4c
+*.background:  #eeeeee
+*.cursorColor: #4d4d4c
+!
+! Black
+*.color0:      #000000
+*.color8:      #000000
+!
+! Red
+*.color1:      #c82829
+*.color9:      #c82829
+!
+! Green
+*.color2:      #718c00
+*.color10:     #718c00
+!
+! Yellow
+*.color3:      #eab700
+*.color11:     #eab700
+!
+! Blue
+*.color4:      #4271ae
+*.color12:     #4271ae
+!
+! Magenta
+*.color5:      #8959a8
+*.color13:     #8959a8
+!
+! Cyan
+*.color6:      #3e999f
+*.color14:     #3e999f
+!
+! White
+*.color7:      #ffffff
+*.color15:     #ffffff
+!
+! Bold, Italic, Underline
+*.colorBD:     #4d4d4c
+
 URxvt.termName:         rxvt-256color
-URxvt.font:             xft:terminus-16
-URxvt.italicFont:       xft:terminus-16
+URxvt.font:             xft:terminus-11
+URxvt.italicFont:       xft:terminus-11
 URxvt.letterSpace:      -1
 URxvt.loginShell:       true
 URxvt.geometry:         80x50
 URxvt.cutchars:         "`\"'&()*,:;<=>?[\\]^{|}$"
 URxvt.saveLines:        10000
-
-!light theme
-URxvt.background:       #ffffff
-URxvt.foreground:       #000000
-!light colors
-URxvt.color0:           #000000
-URxvt.color1:           #CD0000
-URxvt.color2:           #00CD00
-URxvt.color3:           #CDCD00
-URxvt.color4:           #0000CD
-URxvt.color5:           #CD00CD
-URxvt.color6:           #00CDCD
-URxvt.color7:           #FAEBD7
-!dark colors
-URxvt.color8:           #709080
-URxvt.color9:           #cc5454
-URxvt.color10:          #4d9f4d
-URxvt.color11:          #f0dfaf
-URxvt.color12:          #4186be
-URxvt.color13:          #ec93d3
-URxvt.color14:          #93e0e3
-URxvt.color15:          #000000
 
 ! Disable ISO 14755 unicode input so we can use Ctrl-Shift bindings
 URxvt.iso14755:        false
@@ -47,7 +67,7 @@ URxvt.visualBell: true
 
 ! Perl extensions
 URxvt.perl-ext-common: default,matcher
-URxvt.url-launcher: /home/robert/firefox/firefox
+URxvt.url-launcher: /usr/bin/firefox
 URxvt.url-select.underline: true
 URxvt.matcher.button:      1
 
