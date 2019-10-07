@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: using std_stuff
+# key: ustd
+# --
+using std::cout;
+using std::endl;
+using std::string;
+using std::max;
+$0

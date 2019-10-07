@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: rust-test-block
+# key: tests
+# --
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn $0() {
+
+    }
+}

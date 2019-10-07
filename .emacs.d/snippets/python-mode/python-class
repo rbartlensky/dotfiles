@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: python-class
+# key: class
+# --
+class (object):
+
+      def __init__(self, ):
+      

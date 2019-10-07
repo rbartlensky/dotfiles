@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: usevec
+# key: usevec
+# --
+use std::vec::Vec;$0

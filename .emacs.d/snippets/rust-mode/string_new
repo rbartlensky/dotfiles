@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: String_new
+# key: strn
+# --
+String::new("$1")$0

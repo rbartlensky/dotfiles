@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: guard
+# key: grd
+# --
+#ifndef $1
+#define $1
+
+#endif // $1

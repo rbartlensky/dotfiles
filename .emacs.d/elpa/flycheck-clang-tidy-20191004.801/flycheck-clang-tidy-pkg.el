@@ -1,0 +1,2 @@
+;;; -*- no-byte-compile: t -*-
+(define-package "flycheck-clang-tidy" "20191004.801" "Flycheck syntax checker using clang-tidy" '((flycheck "0.30")) :commit "eb82f734529380217c0cd2a53c0d74102eedc301" :keywords '("convenience" "languages" "tools") :authors '((nil . "Sebastian Nagel<sebastian.nagel@ncoding.at>")) :maintainer '("tastytea" . "tastytea@tastytea.de") :url "https://github.com/ch1bo/flycheck-clang-tidy")
