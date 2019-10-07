@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if tmux has-session -t mutt ; then
-    tmux attach -t mutt
+    tmux kill-session -t mutt && tmux attach -t mutt
 else
     tmux \
         new-session -s mutt  "mutt ; read" \; \
