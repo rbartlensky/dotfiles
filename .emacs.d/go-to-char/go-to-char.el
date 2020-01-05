@@ -116,6 +116,7 @@
   (unwind-protect
       (progn
         (search-forward (string char) nil nil n)
+        (backward-char)
         (go-to-char-highlight-overlay (- (point) 1))
         (message "Search %c backward." char)
         (while (char-equal (read-char) char)
