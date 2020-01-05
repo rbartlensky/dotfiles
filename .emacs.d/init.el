@@ -16,6 +16,8 @@
 
 ;; package.el
 (require 'package)
+;; https://www.reddit.com/r/emacs/comments/d0k7jj/undotree065el_bad_request_when_trying_to_access/
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
 (when (< emacs-major-version 24)
