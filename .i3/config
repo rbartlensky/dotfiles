@@ -15,7 +15,7 @@ set $mod Mod4
 # is used in the bar {} block below.
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font xft:monospace 10
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
 # The font above is very space-efficient, that is, it looks good, sharp and
@@ -170,8 +170,7 @@ bar {
                background #ffffff
                focused_workspace  #a05923 #f96f04 #ffffff
         }
-        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        font pango:DejaVu Sans Mono 10
+        font xft:monospace 10
 }
 
 exec --no-startup-id feh --bg-scale /usr/share/backgrounds/gnome/Sandstone.jpg
