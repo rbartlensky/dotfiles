@@ -55,6 +55,35 @@
 (global-set-key (kbd "C-c v") 'uncomment-region)
 (global-set-key (kbd "C-c C-f") 'projectile-find-file)
 (global-set-key (kbd "C-f") 'go-to-char-forward)
+(global-set-key [f11] 'smerge-keep-lower)
+(global-set-key [f12] 'smerge-keep-upper)
+
+(dumb-jump-mode)
+(windmove-default-keybindings)
+
+(require 'visual-regexp-steroids)
+;; (define-key global-map (kbd "C-c r") 'vr/replace)
+(define-key global-map (kbd "C-c q") 'vr/query-replace)
+;; if you use multiple-cursors, this is for you:
+(define-key global-map (kbd "C-c m") 'vr/mc-mark)
+;; to use visual-regexp-steroids's isearch instead of the built-in regexp isearch, also include the following lines:
+(define-key esc-map (kbd "C-r") 'vr/isearch-backward) ;; C-M-r
+(define-key esc-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
 
 (provide 'init)
 ;;; init.el ends here
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   '(rustic whitespace-cleanup-mode visual-regexp-steroids yaml-mode toml-mode rust-auto-use rtags projectile-ripgrep nix-haskell-mode magit lua-mode json-mode jedi irony-eldoc hydandata-light-theme goto-chg fullframe flymake-rust flymake-python-pyflakes flymake-cppcheck flycheck-rust flycheck-irony flycheck-clangcheck flycheck-clang-tidy flycheck-clang-analyzer find-file-in-project elpy dumb-jump company-racer company-irony-c-headers company-irony company-glsl company-c-headers cmake-mode cmake-ide cargo auto-complete-clang apel ac-racer)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
+(setq mode-require-final-newline 1)

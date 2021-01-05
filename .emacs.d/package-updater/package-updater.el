@@ -17,6 +17,7 @@
        'ctable ;
        'dash ;
        'deferred ;
+       'dumb-mode ;
        'elpy ;
        'epc ;
        'epl ;
