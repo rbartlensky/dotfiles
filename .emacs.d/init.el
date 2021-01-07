@@ -47,6 +47,7 @@
 (load "~/.emacs.d/my-modes/my-python-mode.el")
 (load "~/.emacs.d/my-modes/my-cpp-mode.el")
 (load "~/.emacs.d/my-modes/my-rust-mode.el")
+(load "~/.emacs.d/my-modes/my-c-mode.el")
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -87,3 +88,6 @@
  )
 
 (setq mode-require-final-newline 1)
+
+;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Indenting-switch-statements.html
+(c-set-offset 'case-label '+)

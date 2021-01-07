@@ -40,7 +40,7 @@
 ! Bold, Italic, Underline
 *.colorBD:     #4d4d4c
 
-URxvt.termName:         rxvt-256color
+URxvt.termName:         rxvt-unicode-256color
 URxvt.font:             xft:monospace
 URxvt.letterSpace:      -1
 URxvt.loginShell:       true
