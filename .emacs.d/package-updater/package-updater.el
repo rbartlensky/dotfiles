@@ -17,7 +17,6 @@
        'ctable ;
        'dash ;
        'deferred ;
-       'dumb-mode ;
        'elpy ;
        'epc ;
        'epl ;
@@ -64,6 +63,7 @@
        'seq ;
        'toml-mode ;
        'transient ;
+       'visual-regexp-steroids ;
        'with-editor ;
        'yaml-mode ;
        'yasnippet ;

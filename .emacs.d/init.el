@@ -79,7 +79,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(rustic whitespace-cleanup-mode visual-regexp-steroids yaml-mode toml-mode rust-auto-use rtags projectile-ripgrep nix-haskell-mode magit lua-mode json-mode jedi irony-eldoc hydandata-light-theme goto-chg fullframe flymake-rust flymake-python-pyflakes flymake-cppcheck flycheck-rust flycheck-irony flycheck-clangcheck flycheck-clang-tidy flycheck-clang-analyzer find-file-in-project elpy dumb-jump company-racer company-irony-c-headers company-irony company-glsl company-c-headers cmake-mode cmake-ide cargo auto-complete-clang apel ac-racer)))
+   '(visual-regexp-steroids dumb-mode evil dumb-jump rg deadgrep adoc-mode yaml-mode toml-mode rust-auto-use rtags projectile-ripgrep projectile magit lua-mode jedi irony-eldoc hydandata-light-theme goto-chg git-commit fullframe flymake-rust flymake-python-pyflakes flymake-cppcheck flycheck-rust flycheck-irony flycheck-clangcheck flycheck-clang-tidy flycheck-clang-analyzer find-file-in-project epc elpy company-racer company-irony-c-headers company-irony company-glsl company-c-headers cmake-ide cargo auto-complete-clang apel ac-racer)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
