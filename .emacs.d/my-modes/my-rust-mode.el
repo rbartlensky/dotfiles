@@ -24,6 +24,6 @@
   (eval-after-load 'flycheck
     '(add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 
-  (define-key rust-mode-map (kbd "C-c C-f") #'projectile-find-file))
-
+  (define-key rust-mode-map (kbd "C-c C-f") #'projectile-find-file)
+)
 (add-hook 'rust-mode-hook 'my-rust-mode-hook)

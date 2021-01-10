@@ -13,6 +13,8 @@
 (which-function-mode 1) ;;
 (show-paren-mode 1) ;; show matching parenthesis
 (electric-pair-mode 1) ;; closes brackets when opening one
+(windmove-default-keybindings) ;; shit-arrow to move around windows
+(dumb-jump-mode)
 
 ;; package.el
 (require 'package)
@@ -20,15 +22,10 @@
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
 (package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/package-updater")
 (require 'package-updater)
-
-(global-set-key (kbd "C-c r") 'projectile-ripgrep)
 
 (require 'yasnippet)
 (yas-global-mode 1)
@@ -52,15 +49,18 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-(global-set-key (kbd "C-c c") 'comment-region)
-(global-set-key (kbd "C-c v") 'uncomment-region)
-(global-set-key (kbd "C-c C-f") 'projectile-find-file)
+(projectile-mode)
+(global-set-key (kbd "M-s c") 'comment-region)
+(global-set-key (kbd "M-s v") 'uncomment-region)
+(global-set-key (kbd "M-s s") 'projectile-replace)
+(global-set-key (kbd "M-s j") 'projectile-find-other-file)
+(global-set-key (kbd "M-s r") 'projectile-ripgrep)
+(global-set-key (kbd "M-s c") 'projectile-compile-project)
+(global-set-key (kbd "M-s f") 'projectile-find-file)
+(global-set-key (kbd "M-s t") 'projectile-regenerate-tags)
 (global-set-key (kbd "C-f") 'go-to-char-forward)
 (global-set-key [f11] 'smerge-keep-lower)
 (global-set-key [f12] 'smerge-keep-upper)
-
-(dumb-jump-mode)
-(windmove-default-keybindings)
 
 (require 'visual-regexp-steroids)
 ;; (define-key global-map (kbd "C-c r") 'vr/replace)
@@ -72,22 +72,5 @@
 (define-key esc-map (kbd "C-s") 'vr/isearch-forward) ;; C-M-s
 
 (provide 'init)
-;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(visual-regexp-steroids dumb-mode evil dumb-jump rg deadgrep adoc-mode yaml-mode toml-mode rust-auto-use rtags projectile-ripgrep projectile magit lua-mode jedi irony-eldoc hydandata-light-theme goto-chg git-commit fullframe flymake-rust flymake-python-pyflakes flymake-cppcheck flycheck-rust flycheck-irony flycheck-clangcheck flycheck-clang-tidy flycheck-clang-analyzer find-file-in-project epc elpy company-racer company-irony-c-headers company-irony company-glsl company-c-headers cmake-ide cargo auto-complete-clang apel ac-racer)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (setq mode-require-final-newline 1)
-
-;; https://www.gnu.org/software/emacs/manual/html_node/efaq/Indenting-switch-statements.html
-(c-set-offset 'case-label '+)
