@@ -17,6 +17,7 @@
        'ctable ;
        'dash ;
        'deferred ;
+       'dumb-jump ;
        'elpy ;
        'epc ;
        'epl ;
@@ -28,7 +29,6 @@
        'flycheck-clang-tidy ;
        'flycheck-irony ;
        'flycheck-rust ;
-       'flymake-cppcheck ;
        'flymake-easy ;
        'flymake-python-pyflakes ;
        'flymake-rust ;

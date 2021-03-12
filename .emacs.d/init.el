@@ -3,6 +3,18 @@
 ;;; Code:
 
 ;; buffer settings
+;; package.el
+(require 'package)
+(package-initialize)
+;; https://www.reddit.com/r/emacs/comments/d0k7jj/undotree065el_bad_request_when_trying_to_access/
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/"))
+
+(add-to-list 'load-path "~/.emacs.d/package-updater")
+(require 'package-updater)
+;; (install-all-packages)
+
 (global-linum-mode 1) ; line numbers
 (delete-selection-mode) ; when copying over a selected text, delete it
 (setq column-number-mode t) ; column numbers
@@ -14,18 +26,6 @@
 (show-paren-mode 1) ;; show matching parenthesis
 (electric-pair-mode 1) ;; closes brackets when opening one
 (windmove-default-keybindings) ;; shit-arrow to move around windows
-(dumb-jump-mode)
-
-;; package.el
-(require 'package)
-;; https://www.reddit.com/r/emacs/comments/d0k7jj/undotree065el_bad_request_when_trying_to_access/
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-
-(add-to-list 'load-path "~/.emacs.d/package-updater")
-(require 'package-updater)
 
 (require 'yasnippet)
 (yas-global-mode 1)
