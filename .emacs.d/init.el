@@ -15,6 +15,34 @@
 (require 'package-updater)
 ;; (install-all-packages)
 
+(setq package-selected-packages '(lsp-mode yasnippet lsp-treemacs helm-lsp
+    projectile hydra flycheck company avy which-key helm-xref dap-mode))
+
+(when (cl-find-if-not #'package-installed-p package-selected-packages)
+  (package-refresh-contents)
+  (mapc #'package-install package-selected-packages))
+
+;; sample `helm' configuration use https://github.com/emacs-helm/helm/ for details
+(helm-mode)
+(require 'helm-xref)
+(define-key global-map [remap execute-extended-command] #'helm-M-x)
+(define-key global-map [remap switch-to-buffer] #'helm-mini)
+
+(which-key-mode)
+
+(setq gc-cons-threshold (* 100 1024 1024)
+      read-process-output-max (* 1024 1024)
+      treemacs-space-between-root-nodes nil
+      company-idle-delay 0.0
+      company-minimum-prefix-length 1
+      lsp-idle-delay 0.1)  ;; clangd is fast
+
+(with-eval-after-load 'lsp-mode
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+  (require 'dap-cpptools)
+  (yas-global-mode))
+(setq lsp-keymap-prefix "M-s")
+
 (global-linum-mode 1) ; line numbers
 (delete-selection-mode) ; when copying over a selected text, delete it
 (setq column-number-mode t) ; column numbers
@@ -58,6 +86,7 @@
 (global-set-key (kbd "M-s c") 'projectile-compile-project)
 (global-set-key (kbd "M-s f") 'projectile-find-file)
 (global-set-key (kbd "M-s t") 'projectile-regenerate-tags)
+(global-set-key (kbd "M-s x") 'projectile-run-project)
 (global-set-key (kbd "C-f") 'go-to-char-forward)
 (global-set-key [f11] 'smerge-keep-lower)
 (global-set-key [f12] 'smerge-keep-upper)

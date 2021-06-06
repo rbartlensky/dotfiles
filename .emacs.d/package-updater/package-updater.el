@@ -45,6 +45,7 @@
        'jedi-core ;
        'levenshtein ;
        'lua-mode ;
+       'lsp-mode ;
        'magit ;
        'markdown-mode ;
        'pkg-info ;
