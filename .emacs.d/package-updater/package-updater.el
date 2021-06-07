@@ -64,6 +64,7 @@
        'seq ;
        'toml-mode ;
        'transient ;
+       'use-package ;
        'visual-regexp-steroids ;
        'with-editor ;
        'yaml-mode ;

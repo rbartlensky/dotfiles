@@ -78,8 +78,8 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (projectile-mode)
-(global-set-key (kbd "M-s c") 'comment-region)
-(global-set-key (kbd "M-s v") 'uncomment-region)
+(global-set-key (kbd "C-c c") 'comment-region)
+(global-set-key (kbd "C-c v") 'uncomment-region)
 (global-set-key (kbd "M-s s") 'projectile-replace)
 (global-set-key (kbd "M-s j") 'projectile-find-other-file)
 (global-set-key (kbd "M-s r") 'projectile-ripgrep)
