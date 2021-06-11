@@ -40,8 +40,16 @@
 (with-eval-after-load 'lsp-mode
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
   (require 'dap-cpptools)
-  (yas-global-mode))
-(setq lsp-keymap-prefix "M-s")
+  (yas-global-mode)
+  (setq lsp-enable-file-watchers t
+      lsp-file-watch-threshold 8000
+      lsp-modeline-code-actions-enable nil
+      lsp-enable-symbol-highlighting nil
+      lsp-modeline-diagnostics-enable nil
+      lsp-ui-sideline-show-diagnostics nil
+      lsp-ui-sideline-enable nil)
+)
+(setq lsp-keymap-prefix "M-d")
 
 (global-linum-mode 1) ; line numbers
 (delete-selection-mode) ; when copying over a selected text, delete it
