@@ -56,19 +56,23 @@ URxvt.iso14755_52:     false
 URxvt.keysym.C-M-c:    builtin-string:
 URxvt.keysym.C-M-v:    builtin-string:
 
-! Bind Ctrl-Shift-c & Ctrl-Shift-v to copy and paste
-! I dont know why, but I needed to use hex keysym values to get it to work
 URxvt.keysym.M-w: eval:selection_to_clipboard
 URxvt.keysym.C-y: eval:paste_clipboard
 
 URxvt.scrollBar: false
-URxvt.visualBell: true
+URxvt.visualBell: false
 
 ! Perl extensions
-URxvt.perl-ext-common: default,matcher
+URxvt.perl-lib: /home/robert/.urxvt/ext/
+URxvt.perl-ext-common: default,matcher,keyboard-select
 URxvt.url-launcher: /usr/bin/firefox
 URxvt.url-select.underline: true
 URxvt.matcher.button:      1
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+! Quite important to get a selection into CLIPBOARD
+URxvt.keyboard-select.clipboard: true
+URxvt.clipboard.autocopy: true
 
 Xft.dpi: 110
 Xft.lcdfilter: lcddefault
