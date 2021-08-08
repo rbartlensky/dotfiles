@@ -1,3 +1,3 @@
 function emcs
-    emacsclient -c -a emacs $argv
+    emacsclient -c -a emacs $argv &
 end
