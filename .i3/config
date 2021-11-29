@@ -160,7 +160,7 @@ client.focused          #a05923 #d27400 #ffffff #d27400   #d27400
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        status_command i3status -c ~/.i3status.conf
         colors {
                statusline #000000
                background #ffffff

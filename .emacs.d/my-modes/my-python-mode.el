@@ -1,8 +1,0 @@
-(defun my-python-mode ()
-  (elpy-mode)
-  (elpy-enable)
-  (setq elpy-rpc-python-command "python3")
-  (setq python-shell-interpreter "python3")
-  '(elpy-rpc-ignored-buffer-size 204800)
-)
-(add-hook 'python-mode-hook 'my-python-mode)

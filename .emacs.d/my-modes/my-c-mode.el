@@ -1,6 +1,0 @@
-(defun my-c-mode-hook ()
-  (c-set-offset 'substatement-open 0)
-  (setq c-default-style "linux")
-)
-(add-hook 'c-mode-hook 'my-c-mode-hook)
-(add-hook 'c-mode-hook 'lsp)
