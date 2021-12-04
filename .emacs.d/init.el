@@ -51,7 +51,8 @@
   :ensure
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.5))
+  (company-idle-delay 0.5)
+  :hook (after-init . global-company-mode))
 
 (defun rb/c-mode ()
   (c-set-offset 'substatement-open 0)
