@@ -37,6 +37,20 @@
 (global-set-key [f11] 'smerge-keep-lower)
 (global-set-key [f12] 'smerge-keep-upper)
 
+;; toggle dark theme
+(setq current-theme "day")
+(defun rb/darkmode ()
+  (interactive)
+  (if (eq current-theme "night")
+      (progn
+        (setq current-theme "day")
+        (load-theme 'tomorrow-day t))
+    (progn
+      (setq current-theme "night")
+      (load-theme 'tomorrow-night t))
+    ))
+(global-set-key [f5] 'rb/darkmode)
+
 ;; extra hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
@@ -117,7 +131,6 @@
 (use-package projectile
   :ensure
   :bind
-  ("M-s s" . projectile-replace)
   ("M-s s" . projectile-replace)
   ("M-s j" . projectile-find-other-file)
   ("M-s r" . projectile-ripgrep)
