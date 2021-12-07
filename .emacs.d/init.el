@@ -54,10 +54,16 @@
 ;; extra hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(use-package helm :ensure)
+(use-package helm
+  :ensure
+  :config
+  (helm-mode))
 (use-package helm-xref :ensure :after (helm))
 
-(use-package which-key)
+(use-package which-key
+  :ensure
+  :config
+  (which-key-mode))
 
 (use-package flycheck :ensure)
 
