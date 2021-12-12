@@ -27,13 +27,10 @@ font xft:monospace 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec alacritty
 
 # start nm-applet
 bindsym $mod+N exec nm-applet
-
-# start mutt
-bindsym $mod+M exec urxvt -e ~/tmux_mutt.sh
 
 # start i3lock
 bindsym $mod+Shift+P exec i3lock

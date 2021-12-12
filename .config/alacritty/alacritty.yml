@@ -1,0 +1,37 @@
+scrolling:
+  history: 10000
+  multiplier: 3
+
+colors:
+  primary:
+    background: '#ffffff'
+    foreground: '#4d4d4c'
+    dim_foreground: '#888888'
+  normal:
+   black:   '#1d1f21'
+   red:     '#c82829'
+   green:   '#718c00'
+   yellow:  '#f5871f'
+   blue:    '#4271ae'
+   magenta: '#8959a8'
+   cyan:    '#3e999f'
+   white:   '#d6d6d6'
+  bright:
+   black:   '#8e908c'
+   red:     '#ff3334'
+   green:   '#89aa00'
+   yellow:  '#eab700'
+   blue:    '#5795e6'
+   magenta: '#b777e0'
+   cyan:    '#66BDC3'
+   white:   '#efefef'
+
+live_config_reload: true
+
+shell:
+  program: /usr/bin/fish
+
+key_bindings:
+  - { key: Y, mods: Control, mode: ~Vi, action: Paste }
+  - { key: W, mods: Alt, action: Copy }
+  - { key: S, mods: Control, mode: ~Search, action: SearchForward }
