@@ -153,5 +153,5 @@
   ("C-s" . vr/isearch-forward))
 
 (use-package magit :ensure)
-
 (use-package ripgrep :ensure)
+(use-package auto-package-update :ensure)
