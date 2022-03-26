@@ -139,7 +139,6 @@
   :bind
   ("M-s s" . projectile-replace)
   ("M-s j" . projectile-find-other-file)
-  ("M-s r" . projectile-ripgrep)
   ("M-s c" . projectile-compile-project)
   ("M-s f" . projectile-find-file)
   ("M-s t" . projectile-regenerate-tags)
@@ -153,5 +152,7 @@
   ("C-s" . vr/isearch-forward))
 
 (use-package magit :ensure)
-(use-package ripgrep :ensure)
+(use-package deadgrep :ensure
+  :bind
+  ("M-s r" . deadgrep))
 (use-package auto-package-update :ensure)
