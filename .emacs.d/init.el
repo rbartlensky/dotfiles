@@ -151,6 +151,7 @@
   ("C-r" . vr/isearch-backward)
   ("C-s" . vr/isearch-forward))
 
+(use-package org :ensure)
 (use-package magit :ensure)
 (use-package deadgrep :ensure
   :bind
