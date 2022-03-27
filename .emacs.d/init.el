@@ -162,7 +162,15 @@
 
 (use-package org :defer t :ensure)
 (use-package magit :defer t :ensure)
-(use-package deadgrep :ensure
+(use-package deadgrep
+  :defer t
+  :ensure
+  :config
+  (setq auto-package-update-delete-old-versions t)
   :bind
   ("M-s r" . deadgrep))
 (use-package auto-package-update :ensure)
+
+;; if we have specific configs on another machine, load them up
+(if (file-exists-p "~/.emacs.d/extras.el")
+    (load "~/.emacs.d/extras.el"))
