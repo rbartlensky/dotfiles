@@ -3,13 +3,17 @@
 ;;; Code:
 
 (eval-when-compile (require 'use-package))
-
-(require 'use-package)
 (package-initialize)
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
+
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+
+(require 'use-package)
 
 (server-start)
 
@@ -55,10 +59,11 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package helm
+  :defer t
   :ensure
   :config
   (helm-mode))
-(use-package helm-xref :ensure :after (helm))
+(use-package helm-xref :defer t :ensure :after (helm))
 
 (use-package which-key
   :ensure
@@ -113,6 +118,7 @@
   (lsp-ui-doc-enable nil))
 
 (use-package yasnippet
+  :defer t
   :ensure
   :config
   (yas-reload-all)
@@ -130,6 +136,7 @@
   :init
   ;; to use rustic-mode even if rust-mode also installed
   (setq auto-mode-alist (delete '("\\.rs\\'" . rust-mode) auto-mode-alist))
+  :defer t
   :ensure
   :custom
   (lsp-eldoc-hook nil)
@@ -153,8 +160,8 @@
   ("C-r" . vr/isearch-backward)
   ("C-s" . vr/isearch-forward))
 
-(use-package org :ensure)
-(use-package magit :ensure)
+(use-package org :defer t :ensure)
+(use-package magit :defer t :ensure)
 (use-package deadgrep :ensure
   :bind
   ("M-s r" . deadgrep))
