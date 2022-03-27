@@ -1,8 +1,0 @@
-# -*- mode: snippet -*-
-# name: cout include
-# key: incout
-# --
-#include <iostream>
-using std::cout;
-using std::endl;
-$0

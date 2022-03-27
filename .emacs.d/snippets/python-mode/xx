@@ -1,6 +1,0 @@
-# -*- mode: snippet -*-
-# name: xx
-# key: xx
-# --
-def fun($1, $2, $1):
-    $0

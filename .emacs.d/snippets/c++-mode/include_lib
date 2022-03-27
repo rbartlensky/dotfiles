@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: library_include
-# key: incl
-# --
-#include <$1>

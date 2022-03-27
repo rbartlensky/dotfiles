@@ -71,7 +71,7 @@
   :ensure
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.5)
+  (company-idle-delay 0.6)
   :hook (after-init . global-company-mode))
 
 (defun rb/c-mode ()
@@ -88,6 +88,8 @@
 (use-package lsp-mode
   :ensure
   :commands lsp
+  :init
+  (setq lsp-keymap-prefix "M-s l")
   :custom
   (lsp-eldoc-render-all t)
   (lsp-enable-file-watchers t)
