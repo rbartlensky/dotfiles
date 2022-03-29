@@ -59,11 +59,10 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (use-package helm
-  :defer t
   :ensure
   :config
   (helm-mode))
-(use-package helm-xref :defer t :ensure :after (helm))
+(use-package helm-xref :ensure :after (helm))
 
 (use-package which-key
   :ensure
@@ -98,11 +97,13 @@
   :custom
   (lsp-eldoc-render-all t)
   (lsp-enable-file-watchers t)
-  (lsp-file-watch-threshold 8000)
+  (lsp-file-watch-threshold 12000)
   (lsp-enable-symbol-highlighting nil)
   (lsp-modeline-diagnostics-enable nil)
   (lsp-idle-delay 0.6)
-  :hook ((c-mode . lsp) (c++-mode . lsp) (python-mode . lsp))
+  (lsp-pylsp-server-command "pylsp")
+  :hook
+  ((c-mode . lsp) (c++-mode . lsp) (python-mode . lsp))
   :config
   (add-hook 'lsp-mode-hook 'lsp-ui-mode)
   (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration))
