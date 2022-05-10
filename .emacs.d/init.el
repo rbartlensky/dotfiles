@@ -2,7 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(eval-when-compile (require 'use-package))
 (package-initialize)
 
 (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
@@ -14,8 +13,7 @@
     (package-install 'use-package))
 
 (require 'use-package)
-
-(server-start)
+(eval-when-compile (require 'use-package))
 
 ;; misc things
 (tool-bar-mode -1) ;; no more toolbar
@@ -119,7 +117,6 @@
   (lsp-ui-doc-enable nil))
 
 (use-package yasnippet
-  :defer t
   :ensure
   :config
   (yas-reload-all)
@@ -162,7 +159,7 @@
   ("C-s" . vr/isearch-forward))
 
 (use-package org :defer t :ensure)
-(use-package magit :defer t :ensure)
+(use-package magit :ensure)
 (use-package deadgrep
   :defer t
   :ensure
