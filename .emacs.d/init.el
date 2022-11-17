@@ -39,42 +39,21 @@
 (global-set-key [f11] 'smerge-keep-lower)
 (global-set-key [f12] 'smerge-keep-upper)
 
-;; toggle dark theme
-(setq current-theme "day")
-(defun rb/darkmode ()
-  (interactive)
-  (if (eq current-theme "night")
-      (progn
-        (setq current-theme "day")
-        (load-theme 'tomorrow-day t))
-    (progn
-      (setq current-theme "night")
-      (load-theme 'tomorrow-night t))
-    ))
-(global-set-key [f5] 'rb/darkmode)
-
 ;; extra hooks
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
-(use-package helm
-  :ensure
-  :config
-  (helm-mode))
-(use-package helm-xref :ensure :after (helm))
-
-(use-package which-key
-  :ensure
-  :config
-  (which-key-mode))
-
 (use-package flycheck :ensure)
+(use-package helm :ensure :config (helm-mode))
+(use-package helm-xref :ensure :after (helm))
+(use-package which-key :ensure :config (which-key-mode))
+(use-package zenburn-theme :ensure :config (load-theme 'zenburn t))
 
 (use-package company
   :ensure
+  :hook (after-init . global-company-mode)
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0.6)
-  :hook (after-init . global-company-mode))
+  (company-idle-delay 0.6))
 
 (defun rb/c-mode ()
   (c-set-offset 'substatement-open 0)
@@ -87,59 +66,24 @@
   (setq-default c-indent-level 4))
 (add-hook 'c++-mode-hook 'rb/c++-mode)
 
-(use-package lsp-mode
-  :ensure
-  :commands lsp
-  :init
-  (setq lsp-keymap-prefix "M-s l")
-  :custom
-  (lsp-eldoc-render-all t)
-  (lsp-enable-file-watchers t)
-  (lsp-file-watch-threshold 12000)
-  (lsp-enable-symbol-highlighting nil)
-  (lsp-modeline-diagnostics-enable nil)
-  (lsp-idle-delay 0.6)
-  (lsp-pylsp-server-command "pylsp")
-  :hook
-  ((c-mode . lsp) (c++-mode . lsp) (python-mode . lsp))
-  :config
-  (add-hook 'lsp-mode-hook 'lsp-ui-mode)
-  (add-hook 'lsp-mode-hook 'lsp-enable-which-key-integration))
-
-(use-package lsp-ui
-  :ensure
-  :commands lsp-ui-mode
-  :custom
-  (lsp-ui-sideline-show-diagnostics nil)
-  (lsp-ui-sideline-enable nil)
-  (lsp-ui-peek-always-show t)
-  (lsp-ui-sideline-show-hover t)
-  (lsp-ui-doc-enable nil))
-
 (use-package yasnippet
   :ensure
   :config
   (yas-reload-all)
   (add-hook 'prog-mode-hook 'yas-minor-mode))
 
-(use-package tomorrow-day-theme
-  :load-path "~/.emacs.d/themes"
-  :config (load-theme 'tomorrow-day t))
-
 (use-package go-to-char
   :bind (("C-f" . go-to-char-forward))
   :load-path "~/.emacs.d/go-to-char")
 
 (use-package rustic
+  :ensure
   :init
   ;; to use rustic-mode even if rust-mode also installed
   (setq auto-mode-alist (delete '("\\.rs\\'" . rust-mode) auto-mode-alist))
-  :defer t
-  :ensure
-  :custom
-  (lsp-eldoc-hook nil)
-  (lsp-signature-auto-activate nil)
-  (lsp-rust-analyzer-server-display-inlay-hints nil))
+  ;; (setq rustic-format-trigger 'on-save)
+  (setq rustic-rustfmt-args "--edition=2021")
+  (setq rustic-lsp-client 'eglot))
 
 (use-package projectile
   :ensure
@@ -158,16 +102,49 @@
   ("C-r" . vr/isearch-backward)
   ("C-s" . vr/isearch-forward))
 
-(use-package org :defer t :ensure)
+(use-package org :ensure)
 (use-package magit :ensure)
 (use-package deadgrep
   :defer t
   :ensure
+  :bind ("M-s r" . deadgrep))
+(use-package auto-package-update
+  :ensure
+  :config (setq auto-package-update-delete-old-versions t))
+
+(use-package typescript-mode
+  :ensure
+  :init (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
   :config
-  (setq auto-package-update-delete-old-versions t)
-  :bind
-  ("M-s r" . deadgrep))
-(use-package auto-package-update :ensure)
+  (setq typescript-indent-level 2)
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
+
+(use-package tree-sitter
+  :ensure
+  :hook ((rustic typescript-mode typescript-tsx-mode) . tree-sitter-hl-mode)
+  :config
+  (add-to-list 'tree-sitter-major-mode-language-alist '(rustic-mode . rust))
+  (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-tsx-mode . tsx)))
+
+(use-package tree-sitter-langs
+  :ensure
+  :after tree-sitter
+  :config
+  (tree-sitter-require 'rust)
+  (tree-sitter-require 'tsx))
+
+(use-package eglot
+  :ensure
+  :hook ((c-mode c++-mode python-mode typescript-tsx-mode) . eglot-ensure)
+  :bind (:map eglot-mode-map
+              ("M-s a" . eglot-code-actions))
+  :config
+  ;; disable visual actions
+  (put 'eglot-note 'flymake-overlay-control nil)
+  (put 'eglot-warning 'flymake-overlay-control nil)
+  (put 'eglot-error 'flymake-overlay-control nil)
+  (add-to-list 'eglot-server-programs
+               '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
 
 ;; if we have specific configs on another machine, load them up
 (if (file-exists-p "~/.emacs.d/extras.el")
