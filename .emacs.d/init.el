@@ -50,7 +50,6 @@
 
 (use-package flycheck
   :ensure
-  :hook prog-mode
   :config
   (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
@@ -65,16 +64,15 @@
 (use-package helm-xref :ensure :after (helm))
 (use-package which-key :ensure :config (which-key-mode))
 (use-package zenburn-theme :ensure :config (load-theme 'zenburn t))
-(use-package org :ensure)
+(use-package org)
 (use-package magit :ensure)
 (use-package mood-line :ensure :config (mood-line-mode))
 
 (use-package company
   :ensure
-  :hook (after-init . global-company-mode)
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0.6))
+  :hook ((after-init . global-company-mode) (after-init . company-tng-mode))
+  :bind (("<tab>" . company-complete))
+  :custom (company-idle-delay nil))
 
 (defun rb/c-mode ()
   (c-set-offset 'substatement-open 0)
@@ -131,8 +129,7 @@
 (use-package auto-package-update
   :config
   (setq auto-package-update-delete-old-versions t)
-  (setq auto-package-update-hide-results t)
-  (auto-package-update-maybe))
+  (setq auto-package-update-hide-results t))
 
 (use-package typescript-mode
   :ensure
