@@ -1,6 +1,6 @@
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives '("gnu-devel" . "https://elpa.gnu.org/devel/"))
 
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (when (file-exists-p custom-file)
@@ -17,7 +17,7 @@
 (tool-bar-mode -1) ;; no more toolbar
 (menu-bar-mode -1) ;; no more menu bar
 (scroll-bar-mode -1) ;; no more scroll bar
-(global-linum-mode 1) ;; line numbers
+(global-display-line-numbers-mode) ;; line numbers
 (delete-selection-mode) ;; when copying over a selected text, delete it
 (global-hl-line-mode 1) ;; highlight current line
 (show-paren-mode 1) ;; show matching parenthesis
@@ -42,16 +42,11 @@
 (add-hook 'before-save-hook
           (lambda ()
             (unless (derived-mode-p 'markdown-mode)
-              'delete-trailing-whitespace)))
+              (delete-trailing-whitespace))))
 
 (add-hook 'latex-mode-hook
           (lambda ()
             (setq latex-run-command "pdflatex")))
-
-(use-package flycheck
-  :ensure
-  :config
-  (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
 
 (use-package helm
   :ensure
@@ -70,8 +65,8 @@
 
 (use-package company
   :ensure
-  :hook ((after-init . global-company-mode) (after-init . company-tng-mode))
-  :bind (("<tab>" . company-complete))
+  :hook ((after-init . global-company-mode))
+  :bind (("M-<tab>" . company-complete-common-or-cycle))
   :custom (company-idle-delay nil))
 
 (defun rb/c-mode ()
@@ -98,15 +93,12 @@
 
 (use-package rustic
   :ensure
-  :after (flycheck)
   :init
   ;; to use rustic-mode even if rust-mode also installed
   (setq auto-mode-alist (delete '("\\.rs\\'" . rust-mode) auto-mode-alist))
   ;; (setq rustic-format-trigger 'on-save)
   (setq rustic-rustfmt-args "--edition=2021")
-  (setq rustic-lsp-client 'eglot)
-  :config
-  (push 'rustic-clippy flycheck-checkers))
+  (setq rustic-lsp-client 'eglot))
 
 (use-package projectile
   :ensure
@@ -135,7 +127,6 @@
   :ensure
   :init (define-derived-mode typescript-tsx-mode typescript-mode "tsx")
   :config
-  (setq typescript-indent-level 2)
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
 
 (use-package tree-sitter
@@ -152,18 +143,34 @@
   (tree-sitter-require 'rust)
   (tree-sitter-require 'tsx))
 
+(use-package flycheck
+  :ensure
+  :init (global-flycheck-mode))
+
 (use-package eglot
   :ensure
-  :hook ((c-mode c++-mode python-mode typescript-tsx-mode) . eglot-ensure)
+  :pin gnu-devel
+  :hook (((c-mode c++-mode python-mode typescript-tsx-mode go-mode) . eglot-ensure)
+         (eglot-managed-mode . (lambda () (eldoc-mode -1))))
   :bind (:map eglot-mode-map
-              ("M-s a" . eglot-code-actions))
+              ("C-c a" . eglot-code-actions)
+              ("C-c r" . eglot-rename)
+              ("C-c f" . eglot-format-buffer)
+              ("C-c M-f" . eglot-format))
   :config
   ;; disable visual actions
   (put 'eglot-note 'flymake-overlay-control nil)
   (put 'eglot-warning 'flymake-overlay-control nil)
   (put 'eglot-error 'flymake-overlay-control nil)
+  (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
   (add-to-list 'eglot-server-programs
                '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
+
+(use-package flycheck-eglot
+  :ensure
+  :after (flycheck eglot)
+  :config
+  (global-flycheck-eglot-mode 1))
 
 ;; if we have specific configs on another machine, load them up
 (if (file-exists-p "~/.emacs.d/extras.el")
