@@ -2,10 +2,6 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (add-to-list 'package-archives '("gnu-devel" . "https://elpa.gnu.org/devel/"))
 
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(when (file-exists-p custom-file)
-  (load custom-file))
-
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
@@ -27,6 +23,8 @@
 (setq-default indent-tabs-mode nil) ;; no tabs
 (setq inhibit-startup-message t)
 (setq mode-require-final-newline 1)
+(blink-cursor-mode -1) ;; steady cursor
+(pixel-scroll-precision-mode) ;; smooth scrolling
 
 ;; improves completion performance
 (setq gc-cons-threshold (* 100 1024 1024))
@@ -51,21 +49,33 @@
 (use-package helm
   :ensure
   :bind
-  (("M-x" . helm-M-x)
-   ("C-x C-f" . helm-find-files))
-  :config
-  (helm-mode 1))
+  ("M-x" . helm-M-x)
+  ("C-x C-f" . helm-find-files)
+  :hook ((after-init . helm-mode)))
+
+(use-package avy
+  :ensure t
+  :bind (("C-c j" . avy-goto-line)
+         ("C-:"   . avy-goto-char-timer)))
 
 (use-package helm-xref :ensure :after (helm))
 (use-package which-key :ensure :config (which-key-mode))
-(use-package zenburn-theme :ensure :config (load-theme 'zenburn t))
-(use-package org)
-(use-package magit :ensure)
-(use-package mood-line :ensure :config (mood-line-mode))
+;; (use-package zenburn-theme :ensure :config (load-theme 'zenburn t))
+(use-package modus-themes :ensure :config (load-theme 'modus-operandi-tinted t))
+(use-package org :mode "\\.org$")
+
+(use-package magit
+  :ensure
+  :config
+  ;;(setq magit-refresh-verbose t)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream))
+
+;; (use-package mood-line :ensure :config (mood-line-mode))
 
 (use-package company
   :ensure
-  :hook ((after-init . global-company-mode))
+  :hook (after-init . global-company-mode)
   :bind (("M-<tab>" . company-complete-common-or-cycle))
   :custom (company-idle-delay nil))
 
@@ -129,19 +139,8 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
 
-(use-package tree-sitter
-  :ensure
-  :hook ((rustic typescript-mode typescript-tsx-mode) . tree-sitter-hl-mode)
-  :config
-  (add-to-list 'tree-sitter-major-mode-language-alist '(rustic-mode . rust))
-  (add-to-list 'tree-sitter-major-mode-language-alist '(typescript-tsx-mode . tsx)))
-
-(use-package tree-sitter-langs
-  :ensure
-  :after tree-sitter
-  :config
-  (tree-sitter-require 'rust)
-  (tree-sitter-require 'tsx))
+(use-package treesit-auto
+  :ensure)
 
 (use-package flycheck
   :ensure
@@ -162,9 +161,17 @@
   (put 'eglot-note 'flymake-overlay-control nil)
   (put 'eglot-warning 'flymake-overlay-control nil)
   (put 'eglot-error 'flymake-overlay-control nil)
-  (setq eglot-ignored-server-capabilities '(:inlayHintProvider))
+  (setq eglot-ignored-server-capabilities '(:inlayHintProvider :documentOnTypeFormattingProvider))
+  (add-hook 'eglot--managed-mode-hook (lambda () (flymake-mode -1)))
   (add-to-list 'eglot-server-programs
                '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
+
+(use-package esup
+  :ensure
+  ;; To use MELPA Stable use ":pin melpa-stable",
+  :pin melpa
+  :config
+  (setq esup-depth 0))
 
 (use-package flycheck-eglot
   :ensure
