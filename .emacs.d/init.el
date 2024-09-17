@@ -93,10 +93,6 @@
   :config
   (yas-reload-all))
 
-(use-package go-to-char
-  :bind (("C-f" . go-to-char-forward))
-  :load-path "~/.emacs.d/go-to-char")
-
 (use-package visual-regexp-steroids
   :ensure
   :bind ("C-c q" . vr/query-replace))
