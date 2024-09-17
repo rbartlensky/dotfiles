@@ -97,10 +97,6 @@
   :ensure
   :bind ("C-c q" . vr/query-replace))
 
-(use-package deadgrep
-  :ensure
-  :bind ("M-s r" . deadgrep))
-
 (use-package auto-package-update
   :ensure
   :config
