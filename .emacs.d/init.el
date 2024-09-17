@@ -103,7 +103,7 @@
   (setq auto-package-update-delete-old-versions t)
   (setq auto-package-update-hide-results t))
 
-(use-package typescript-mode
+(use-package typescript-ts-mode
   :init (define-derived-mode typescript-tsx-mode typescript-ts-mode "tsx")
   :config
   (add-to-list 'auto-mode-alist '("\\.tsx?\\'" . typescript-tsx-mode)))
