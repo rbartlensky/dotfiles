@@ -65,7 +65,7 @@
 (use-package avy
   :ensure
   :bind (("C-c j" . avy-goto-line)
-         ("C-:"   . avy-goto-char-timer)))
+         ("M-s"   . avy-goto-char-timer)))
 
 (use-package helm-xref :ensure :after (helm))
 (use-package which-key :ensure :config (which-key-mode))
